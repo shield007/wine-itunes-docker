@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t wine-itunes .
+docker build --rm=true -t wine-itunes .
