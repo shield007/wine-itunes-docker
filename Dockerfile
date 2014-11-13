@@ -21,11 +21,20 @@ RUN dpkg --add-architecture i386 && apt-get update -y && apt-get install -y wine
 
 RUN apt-get install -y p7zip-full 
 
+ENV WINEPREFIX /windows
 ADD ./iTunesSetup.exe /tmp/itunes-installer.exe
-RUN mkdir /tmp/extracted && cd /tmp/extracted
-RUN 7z e /tmp/itunes-installer.exe
-RUN rm -rf /tmp/extracted
+RUN mkdir /tmp/extracted && \
+    cd /tmp/extracted && \
+    7z e /tmp/itunes-installer.exe && \
+    mkdir -p /windows/drive_c && \
+    mv /tmp/extracted/* /windows/drive_c/
+
+#RUN rm -rf /tmp/extracted
+
+RUN wine msiexec /i c:/AppleApplicationSupport.msi /qn
 
 #RUN wine /tmp/itunes.exe
+
+#RUN winetricks riched20
 
 CMD /usr/bin/itunes.sh
