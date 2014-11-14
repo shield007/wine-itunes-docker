@@ -30,7 +30,10 @@ RUN cd /extracted && \
 
 #RUN rm -rf /extracted
 
+RUN cd /windows/drive_c/
 RUN wine msiexec /i c:/AppleApplicationSupport.msi /qn
+RUN wine msiexec /i c:/Bonjour64.msi /qn
+#RUN wine msiexec /i c:/iTunes64Setup.exe /qn
 
 #RUN wine /tmp/itunes.exe
 
